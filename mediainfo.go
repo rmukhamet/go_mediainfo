@@ -64,10 +64,28 @@ func (mi *MediaInfo) Close() {
 	C.GoMediaInfo_Close(mi.handle)
 }
 
-// Get - allow to read info from file
+// Get - allow to read General info from file
 func (mi *MediaInfo) Get(param string) (result string) {
 	p := C.CString(param)
 	r := C.GoMediaInfoGet(mi.handle, p)
+	result = C.GoString(r)
+	C.free(unsafe.Pointer(p))
+	C.free(unsafe.Pointer(r))
+	return
+}
+// Get - allow to read Video info from file
+func (mi *MediaInfo) GetVideo(param string) (result string) {
+	p := C.CString(param)
+	r := C.GoVideoInfoGet(mi.handle, p)
+	result = C.GoString(r)
+	C.free(unsafe.Pointer(p))
+	C.free(unsafe.Pointer(r))
+	return
+}
+// Get - allow to read Audio info from file
+func (mi *MediaInfo) GetAudio(param string) (result string) {
+	p := C.CString(param)
+	r := C.GoAudioInfoGet(mi.handle, p)
 	result = C.GoString(r)
 	C.free(unsafe.Pointer(p))
 	C.free(unsafe.Pointer(r))
