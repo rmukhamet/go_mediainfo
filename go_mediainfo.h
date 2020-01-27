@@ -48,7 +48,12 @@ void GoMediaInfo_Close(void *handle) {
 const char *GoMediaInfoGet(void *handle, char *name) {
     return toChar(MediaInfo_Get(handle, MediaInfo_Stream_General, 0,  toWchar(name), MediaInfo_Info_Text, MediaInfo_Info_Name));
 }
-
+const char *GoVideoInfoGet(void *handle, char *name) {
+    return toChar(MediaInfo_Get(handle, MediaInfo_Stream_Video, 0,  toWchar(name), MediaInfo_Info_Text, MediaInfo_Info_Name));
+}
+const char *GoAudioInfoGet(void *handle, char *name) {
+    return toChar(MediaInfo_Get(handle, MediaInfo_Stream_Audio, 0,  toWchar(name), MediaInfo_Info_Text, MediaInfo_Info_Name));
+}
 const char *GoMediaInfoOption(void *handle, char *name, char *value) {
     return toChar(MediaInfo_Option(handle, toWchar(name), toWchar(value)));
 }
